@@ -8,7 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: url("/assets/imgs/background.avif");
+  background: url("../assets/imgs/background.avif");
   height: 100vh;
   counter-reset: counter;
 }
@@ -153,19 +153,16 @@ td.miss {
   z-index: 2;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 
 .modalActive {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   width: 350px;
   height: 495px;
-  top: calc(50% - 250px);
-  left: calc(50% - 175px);
   border-radius: 10px;
-  cursor: default;
   padding: 40px 20px;
   border: 2px solid black;
   border-radius: 45px;
@@ -175,13 +172,9 @@ td.miss {
 
 .modalClose {
   font-family: var(--font-regular);
-  position: absolute;
-  right: 5px;
-  top: 5px;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  padding-right: 20px;
 }
 
 .modalClose img {

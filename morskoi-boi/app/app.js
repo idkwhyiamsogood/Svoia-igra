@@ -323,7 +323,7 @@ function handleCellClick(cell, row, table) {
 function showQuestion() {
   let random  = Math.floor(Math.random() * questions.length - 1);
   const question = questions[random]
-  document.querySelectorAll(".modalBackground")[2].style.display = "block";
+  document.querySelectorAll(".modalBackground")[2].style.display = "flex";
   document.querySelector(".question").innerHTML = question.title;
   document.querySelector(".answer").innerHTML = question.answer;
   delete questions[random];
@@ -355,7 +355,7 @@ function toggleUntouchable() {
 }
 
 function winner() {
-  document.querySelectorAll(".modalBackground")[1].style.display = "block";
+  document.querySelectorAll(".modalBackground")[1].style.display = "flex";
   if (counter_1 > counter_2) {
     document.querySelector(".winner").innerHTML = firstTeam;
   } else {
@@ -367,7 +367,7 @@ function closeModal() {
   if (document.querySelectorAll("table").length != 2) {
     document.querySelector(".createBattlefield").style.display = "flex";
   }
-  document.querySelectorAll(".modalActive").forEach((modal) => {
+  document.querySelectorAll(".modalBackground").forEach((modal) => {
     modal.style.display = "none";
   });
   document.querySelector(".modal-button-container *").style.display = "none";
@@ -377,7 +377,7 @@ function closeModal() {
 
 function openModal() {
   document.querySelector(".createBattlefield").style.display = "none";
-  document.querySelector(".modalBackground").style.display = "block";
+  document.querySelector(".modalBackground").style.display = "flex";
   document.querySelector(".modalActive").style.display = "block";
 }
 
