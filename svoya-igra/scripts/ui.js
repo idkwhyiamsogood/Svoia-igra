@@ -7,12 +7,12 @@ function prepareGameUI(){
     
         // Обновляем и показываем таблицу счёта
         refreshScoresTable();
-        $("table.scores").show();
+        $scoresTable.show();
     
         // Показываем игровое поле
-        $(".commands-area").hide();
-        $(".game-field").show();
-        $(".game-field").fadeIn(250);
+        $cmdsArea.hide();
+        $gameTable.show();
+        $gameTable.fadeIn(250);
 
         $("body").show();
         animateCSS("body", "fadeIn");
@@ -21,38 +21,39 @@ function prepareGameUI(){
 
 function closeDialog(){
     // Закрыть диалог
-    $("dialog")[0].close();
-    $("dialog").hide();
+    $dlg[0].close();
+    $dlg.hide();
     stopClocksInterval();
 }
 
 function showAnswer(){
     // Показать ответ и нужные кнопки
-    $("dialog h3").show();
-    $("dialog .show-answer").hide();
-    $("dialog .right").show();
-    $("dialog .wrong").show();
+    $dlgDesc.show();
+    $dlgShowBtn.hide();
+    $dlgRightBtn.show();
+    $dlgWrongBtn.show();
     stopClocksInterval();
 }
 
 function showDialog(title, description, answer){
     // Сбрасываем состояние диалога
-    $("dialog h1").text(title);
-    $("dialog h2").text(description);
-    $("dialog h3").text(answer);
-    $("dialog .right, dialog .wrong").hide();
-    $("dialog .show-answer").show();
-    $("dialog h3").hide();
-    $("#dialog-timer").text("01:00");
+    $dlgTitle.text(title);
+    $dlgSubtitle.text(description);
+    $dlgDesc.text(answer);
+    $dlgRightBtn.hide();
+    $dlgWrongBtn.hide();
+    $dlgShowBtn.show();
+    $dlgDesc.hide();
+    $dlgTimer.text("01:00");
     setClocksInterval();
     // Показываем диалог
-    $("dialog").show();
-    $("dialog")[0].showModal();
+    $dlg.show();
+    $dlg[0].showModal();
 }
 
 function updateCurrentCommand(){
     // Обновляем статус игры
-    $(".game-status").text(`Сейчас играет: Команда ${commandsData[lastCommandId].name}`);
+    $gameStatus.text(`Сейчас играет: Команда ${commandsData[lastCommandId].name}`);
 }
 
 const animateCSS = (element, animation, prefix = 'animate__') =>

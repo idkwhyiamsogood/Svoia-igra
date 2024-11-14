@@ -8,13 +8,32 @@ let currentQuestion = "";
 
 let gameData = {};
 
+let $dlg = $("dialog");
+let $dlgTimer = $("#dialog-timer");
+
+let $dlgTitle = $("dialog h1");
+let $dlgSubtitle = $("dialog h2");
+let $dlgDesc = $("dialog h3");
+
+let $dlgRightBtn = $("dialog .right");
+let $dlgWrongBtn = $("dialog .wrong");
+let $dlgShowBtn = $("dialog .show-answer");
+
+let $scoresTable = $("table.scores");
+let $gameTable = $(".game-field");
+let $gameStatus = $(".game-status");
+let $title = $(".game-round-title");
+
+let $roundTitle = $(".game-round");
+let $cmdsArea = $(".commands-area");
+
 $(document).ready(function() {
-    $(".show-answer").click(function() {
+    $dlgShowBtn.click(function() {
         // Показать ответ
         showAnswer();
     });
 
-    $(".right").click(function() {
+    $dlgRightBtn.click(function() {
         // Ответ верный -> + счёт
         commandsData[lastCommandId].scores += parseInt(currentQuestion.split("-")[1]);
         nextCommand();
@@ -22,7 +41,7 @@ $(document).ready(function() {
         closeDialog();
     });
 
-    $(".wrong").click(function() {
+    $dlgWrongBtn.click(function() {
         // Ответ неверный
         nextCommand();
         refreshScoresTable();
@@ -30,27 +49,10 @@ $(document).ready(function() {
     });
 });
 
-function closeDialog(){
-    // Закрыть диалог
-    $("dialog")[0].close();
-    $("dialog").hide();
-    stopClocksInterval();
-}
-
-function showAnswer(){
-    // Показать ответ и нужные кнопки
-    $("dialog h3").show();
-    $("dialog .show-answer").hide();
-    $("dialog .right").show();
-    $("dialog .wrong").show();
-    stopClocksInterval();
-}
-
 function setClocksInterval(){
     // Интервал для уменьшения счётчика
     clocksInterval = setInterval(() => {
-        let $timer = $("#dialog-timer");
-        let currentTime = $timer.text();
+        let currentTime = $dlgTimer.text();
         let [minutes, seconds] = currentTime.split(":");
         minutes = parseInt(minutes);
         seconds = parseInt(seconds);
@@ -70,7 +72,7 @@ function setClocksInterval(){
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        $timer.html(minutes + ":" + seconds);
+        $dlgTimer.html(minutes + ":" + seconds);
     }, 1000);
 }
 
@@ -96,11 +98,9 @@ function saveCommands(){
 
 function refreshScoresTable(){
     // Обновляем таблицу с текущими очками
-    let $table = $("table.scores");
-
-    $table.html("");
+    $scoresTable.html("");
     commandsData.forEach(item => {
-        $table.append(`<tr><th>${item.name}</th><td>${item.scores}</td></tr>`);
+        $scoresTable.append(`<tr><th>${item.name}</th><td>${item.scores}</td></tr>`);
     })
 }
 
@@ -125,8 +125,7 @@ function isGameEnded(){
 }
 
 function renderTable(){
-    const $table = $('.game-field');
-    $table.html("");
+    $gameTable.html("");
     
     // Генерируем саму таблицу
     for (let i = 0; i < gameData.categories.length; i++) {
@@ -137,7 +136,7 @@ function renderTable(){
             headerRow += `<td data-category="${gameData.categories[i].id}">${n * 100}</td>`;
         }
         headerRow += '</tr>';
-        $table.append(headerRow);
+        $gameTable.append(headerRow);
     }
 
     // onClick
@@ -158,16 +157,16 @@ function renderTable(){
 }
 
 function nextRound(){
-    $(".game-round-title").show();
+    $title.show();
     currentRound++;
     if(!mock[currentRound]) {
         alert("игра окончена!")
         return;
     }
-    $(".game-round").text(`Раунд ${currentRound}`);
+    $roundTitle.text(`Раунд ${currentRound}`);
 
     gameData = mock[currentRound];
     closeDialog();
-    $(".game-field td.used").removeClass("used");
+    $gameTable.children("td.used").removeClass("used");
     renderTable();
 }
