@@ -378,7 +378,7 @@ function closeModal() {
 function openModal() {
   document.querySelector(".createBattlefield").style.display = "none";
   document.querySelector(".modalBackground").style.display = "flex";
-  document.querySelector(".modalActive").style.display = "block";
+  document.querySelector(".modalActive").style.display = "grid";
 }
 
 function showAnswer() {
