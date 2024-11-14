@@ -1,0 +1,67 @@
+<!--СВОЯ ИГРА -->
+<!-- Проект, разработанный для Колледжа ВятГУ -->
+<!-- </> by @seeeroy -->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Своя Игра</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/animate.min.css">
+
+    <!-- Важные штуки -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body class="animate__animated animate__fadeIn">
+    <!-- Основной контейнер -->
+    <div class="container">
+        <h1 class="game-title">Своя Игра
+            <!-- Номер раунда -->
+            <span class="game-round-title" style="display: none;"> • <span class="game-round"></span></span>
+        </h1>
+        <h2 class="game-status">Ввод команд</h2>
+
+        <!-- Ввод команд -->
+        <div class="commands-area">
+            <h4>Укажите название каждой команды с новой строки</h4>
+            <textarea></textarea>
+            <button onclick="saveCommands()" class="blue">Сохранить команды</button>
+        </div>
+
+        <!-- Основное игровое поле -->
+        <table style="display: none;" class="game-field"></table>
+    </div>
+
+    <!-- Таблица очков -->
+    <table class="scores" style="display: none;"></div>
+
+    <!-- Диалог в ожидании ответа -->
+    <dialog style="display: none;">
+        <div class="clock">
+            <span class="material-symbols-outlined">timer</span>
+            <span id="dialog-timer"></span>
+        </div>
+        <!-- Категория и номер -->
+        <h1></h1>
+        <!-- Вопрос -->
+        <h2></h2>
+        <!-- Ответ -->
+        <h3></h3>
+        <!-- Кнопочки -->
+        <div class="buttons">
+            <button class="show-answer">Показать ответ</button>
+            <button class="right blue">Верно</button>
+            <button class="wrong blue">Неверно</button>
+        </div>
+    </dialog>
+
+    <!-- Основные скрипты -->
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/mock.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
