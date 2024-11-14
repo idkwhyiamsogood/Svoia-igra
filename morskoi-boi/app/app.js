@@ -80,23 +80,24 @@ function exportSelected() {
   // Assuming only the first two tables are used for two teams
   gameData[0] = result.slice(0, 10); // First team's battlefield data
   gameData[1] = result.slice(10); // Second team's battlefield data
-  alert("Успешно сохранено!");
 
-  const selectedCells = document.querySelectorAll(".battlefield td.selected");
-  selectedCells.forEach(function (cell) {
+  // Убираем выделение после сохранения
+  document.querySelectorAll(".battlefield td.selected").forEach(function (cell) {
     cell.classList.remove("selected");
   });
+
+  alert("Успешно сохранено!");
 }
 
 function startGame() {
-  let sum = 0;
+  /* let sum = 0;
   shipCounters.forEach((num) => {
     sum += num;
   });
-  // if (sum < 40) {
-  //   alert("Поставьте все корабли на поле");
-  //   return;
-  // }
+  if (sum < 40) {
+  alert("Поставьте все корабли на поле");
+  return;
+  }*/
   gameState = "playing";
   player = 0;
   exportSelected();
@@ -134,34 +135,33 @@ function handleCellClick(cell, row, table) {
   else if (gameState === "playing") {
     let index = Array.from(row.parentNode.children).indexOf(row) - 1;
     let subIndex = Array.from(row.children).indexOf(cell) - 1;
-    if (
-      table.querySelectorAll("td.shot") + table.querySelectorAll("td.hit") ===
-      20
-    ) {
-      winner();
-    } else {
-      if (gameData[currentPlayer][index][subIndex] === 1) {
-        hit = false;
-        showQuestion();
-        console.log(hit);
-        if (hit === true) {
-          updateCounter();
-          cell.classList.add("hit");
-        } else {
-          cell.classList.add("shot");
-        }
+
+    // И перед нами ПОБЕДИТЕЛЬ
+    if (table.querySelectorAll("td.shot") + table.querySelectorAll("td.hit") === 20) return winner();
+
+    if (gameData[currentPlayer][index][subIndex] === 1) {
+      // Попал
+      hit = false;
+      showQuestion();
+      if (hit === true) {
+        updateCounter();
+        cell.classList.add("hit");
       } else {
-        cell.classList.add("miss");
-        player = player === 1 ? 0 : 1;
-        toggleUntouchable();
+        cell.classList.add("shot");
       }
+    } else {
+      // Не попал
+      cell.classList.add("miss");
+      player = player === 1 ? 0 : 1;
+      toggleUntouchable();
     }
   }
 }
 
 function showQuestion() {
+  // Показать рандомный вопрос
   let random  = Math.floor(Math.random() * questions.length - 1);
-  const question = questions[random]
+  const question = questions[random];
   document.querySelectorAll(".modalBackground")[2].style.display = "flex";
   document.querySelector(".question").innerHTML = question.title;
   document.querySelector(".answer").innerHTML = question.answer;
