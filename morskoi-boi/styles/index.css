@@ -128,7 +128,6 @@ td.miss {
 }
 
 .counter {
-  display: flex;
   flex-direction: column;
   width: max-content;
   padding: 25px;

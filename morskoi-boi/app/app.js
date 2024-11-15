@@ -11,6 +11,9 @@ let shipLimit = 20; // Ограничение на количество кора
 let shipCounters = [0, 0]; // Счетчики для каждого поля (по одному для каждой команды)
 let hit = false;
 
+// доделать функцию countYes
+// и все игра готова по идее
+
 // В целом
 // сделать drag n drop
 
@@ -90,28 +93,27 @@ function exportSelected() {
 }
 
 function startGame() {
-  /* let sum = 0;
+  let sum = 0;
   shipCounters.forEach((num) => {
     sum += num;
   });
   if (sum < 40) {
   alert("Поставьте все корабли на поле");
   return;
-  }*/
+  }
   gameState = "playing";
   player = 0;
   exportSelected();
   document.querySelector(".law-text").style.display = "none";
   document.querySelector(".createBattlefield").style.display = "none";
   document.querySelector(".counter-container").classList.remove("hidden");
-  document.querySelector(".counter-container").classList.remove("hidden");
+  document.querySelector(".counter").style.display = "flex";
   toggleUntouchable();
 }
 
 function handleCellClick(cell, row, table) {
   let currentPlayer = parseInt(table.id); // Получаем id текущего поля, преобразуем в число
   let selectedCells = table.querySelectorAll("td.selected").length; // Получаем количество выбранных клеток для текущей таблицы
-
   // Если в режиме выбора кораблей
   if (gameState === "selecting") {
     // Если клетка не выбрана и на поле ещё не размещено 20 кораблей
@@ -144,6 +146,7 @@ function handleCellClick(cell, row, table) {
       hit = false;
       showQuestion();
       if (hit === true) {
+        closeModal();
         updateCounter();
         cell.classList.add("hit");
       } else {
@@ -166,6 +169,7 @@ function showQuestion() {
   document.querySelector(".question").innerHTML = question.title;
   document.querySelector(".answer").innerHTML = question.answer;
   delete questions[random];
+  console.log(question.length)
 }
 
 function updateCounter() {
@@ -222,21 +226,25 @@ function openModal() {
 
 function showAnswer() {
   document.querySelector(".modal-button-container").style.display = "flex";
+  document.querySelectorAll(".modalBtn").forEach((btn) => {btn.style.display = "block"});
   document.querySelector(".answer").style.display = "flex";
   document.querySelector(".hidden-text").style.display = "flex";
   document.querySelector(".modalBtn-showAnswer").style.display = "none";
+}
+
+function countYes() {
+  hit = True;
+  closeModal()
 }
 
 window.onload = function () {
   document
     .querySelector(".createBattlefield")
     .addEventListener("click", openModal);
-  document.querySelector(".modalBtn-yes").addEventListener("click", () => {
-    hit = true;
-  });
-  document.querySelector(".modalBtn-no").addEventListener("click", closeModal)
-  document.querySelector(".modalBtn-showAnswer").addEventListener("click", showAnswer)
-  document.querySelector(".modalBtn-no").addEventListener("click", closeModal);
+  document.querySelectorAll(".modalBtn")[0].addEventListener("click", countYes);
+  document.querySelector(".modalClose").addEventListener("click", closeModal);
+  document.querySelector(".modalBtn-showAnswer").addEventListener("click", showAnswer);
+  document.querySelectorAll(".modalBtn")[1].addEventListener("click", closeModal);
   document.querySelector(".startGame").addEventListener("click", startGame);
   document.querySelector(".modalClose").addEventListener("click", closeModal);
   document
