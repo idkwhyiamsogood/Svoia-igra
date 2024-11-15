@@ -221,7 +221,7 @@ function openModal() {
 }
 
 function showAnswer() {
-  document.querySelector(".modal-button-container *").style.display = "flex";
+  document.querySelector(".modal-button-container").style.display = "flex";
   document.querySelector(".answer").style.display = "flex";
   document.querySelector(".hidden-text").style.display = "flex";
   document.querySelector(".modalBtn-showAnswer").style.display = "none";

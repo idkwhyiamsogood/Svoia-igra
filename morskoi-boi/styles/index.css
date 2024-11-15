@@ -306,4 +306,5 @@ td.miss {
 
 .modal-button-container {
   display: none;
+  gap: 15px;
 }
