@@ -1,4 +1,4 @@
-import {questions} from "./data.js";
+import {quiz1, quiz2} from "./data.js";
 
 let player = 0;
 let gameState = "selecting";
@@ -18,6 +18,7 @@ let hit = false;
 // сделать drag n drop
 
 function createBattlefield() {
+  const tableArr = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'К'];
   const table = document.createElement("table");
   table.classList.add("battlefield");
   table.id = player; // Устанавливаем id текущего поля (для каждой команды)
@@ -33,7 +34,7 @@ function createBattlefield() {
   for (let i = 0; i < 10; i++) {
     const row = table.insertRow();
     const rowHeader = document.createElement("th");
-    rowHeader.textContent = String.fromCharCode(65 + i);
+    rowHeader.textContent = tableArr[i];
     row.appendChild(rowHeader);
 
     for (let j = 0; j < 10; j++) {
@@ -138,22 +139,15 @@ function handleCellClick(cell, row, table) {
     let index = Array.from(row.parentNode.children).indexOf(row) - 1;
     let subIndex = Array.from(row.children).indexOf(cell) - 1;
 
-    // И перед нами ПОБЕДИТЕЛЬ
     if (table.querySelectorAll("td.shot") + table.querySelectorAll("td.hit") === 20) return winner();
 
     if (gameData[currentPlayer][index][subIndex] === 1) {
-      // Попал
-      hit = false;
-      showQuestion();
-      if (hit === true) {
-        closeModal();
-        updateCounter();
-        cell.classList.add("hit");
-      } else {
-        cell.classList.add("shot");
+      if (parseInt(selectedOption.value) === correctAnswer) {
+    cell.classList.add("hit");
+  } else {
+    cell.classList.add("shot")
       }
     } else {
-      // Не попал
       cell.classList.add("miss");
       player = player === 1 ? 0 : 1;
       toggleUntouchable();
@@ -161,15 +155,38 @@ function handleCellClick(cell, row, table) {
   }
 }
 
+// Функция для инициализации модального окна с вопросом и вариантами ответа
 function showQuestion() {
-  // Показать рандомный вопрос
-  let random  = Math.floor(Math.random() * questions.length - 1);
-  const question = questions[random];
-  document.querySelectorAll(".modalBackground")[2].style.display = "flex";
-  document.querySelector(".question").innerHTML = question.title;
-  document.querySelector(".answer").innerHTML = question.answer;
-  delete questions[random];
-  console.log(question.length)
+  let currentQuiz = player === 1 ? quiz1 : quiz2;
+  let random  = Math.floor(Math.random() * currentQuiz.length - 1);
+  const modalActive = document.querySelector('.modalActive');
+  const answerElem = document.querySelector('.answer');
+  const questionElem = document.querySelector('.question');
+
+  // Заполняем вопрос и варианты ответа
+  questionElem.textContent = currentQuiz.title;
+  document.querySelectorAll('.option').forEach((input, index) => {
+    input.nextElementSibling.textContent = currentQuiz.options[index];
+  });
+
+  modalActive.style.display = "block"; // Показываем модальное окно
+}
+
+function checkAnswer() {
+  const selectedOption = document.querySelector('input[name="question"]:checked');
+  const modalActive = document.querySelector('.modalActive');
+  const answerElem = document.querySelector('.answer');
+
+  if (!selectedOption) return;
+
+  const correctAnswer = currentQuiz.answer;
+  if (parseInt(selectedOption.value) === correctAnswer) {
+    cell.classList.add("hit");
+  } else {
+    cell.classList.add("shot")
+  }
+
+  modalActive.style.display = "none"; 
 }
 
 function updateCounter() {
@@ -233,8 +250,7 @@ function showAnswer() {
 }
 
 function countYes() {
-  hit = True;
-  closeModal()
+  hit = true;
 }
 
 window.onload = function () {
