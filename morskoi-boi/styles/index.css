@@ -1,19 +1,18 @@
-* {
-  font-weight: 600;
-  font-size: 20pt;
-}
+  * {
+    font-weight: 600;
+    font-size: 20pt;
+  }
 
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: url("../assets/imgs/background.avif");
-  height: 100vh;
-  counter-reset: counter;
-}
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: url("../assets/imgs/background.avif");
+    height: 100vh;
+  }
 
-input {
+input[type=text] {
   all: unset;
   border: 1px solid black;
   padding: 10px;
