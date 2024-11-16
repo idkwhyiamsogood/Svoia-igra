@@ -176,7 +176,7 @@ function checkAnswer() {
   const selectedOption = document.querySelector('input[name="question"]:checked');
   const modalActive = document.querySelector('.modalActive');
   const answerElem = document.querySelector('.answer');
-
+  
   if (!selectedOption) return;
 
   const correctAnswer = currentQuiz.answer;
