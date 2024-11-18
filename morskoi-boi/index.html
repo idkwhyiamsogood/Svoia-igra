@@ -16,7 +16,7 @@
             </div>
             <div class="modal-container">
                 <label for="firstTeam">Введите название первой команды</label>
-                <input type="text" id="firstTeam"> 
+                <input type="text" id="firstTeam">
                 <label for="secondTeam">Введите название второй команды</label>
                 <input type="text" id="secondTeam">
                 <button class="saveModal">Сохранить</button>
@@ -39,51 +39,38 @@
     <div class="modalBackground">
         <div class="modalActive">
             <div class="modalClose">
-              <img src="assets/svg/modalCross.svg" onclick="closeModal()">
+                <img src="assets/svg/modalCross.svg" onclick="closeModal()">
             </div>
             <div class="modal-container">
-              <p class="question"></p>
-          
-              <fieldset>
-                <div>
-                  <input type="radio" class="option" id="option1" name="question" value="0" />
-                  <label for="option1"></label>
-                </div>
-                <div>
-                  <input type="radio" class="option" id="option2" name="question" value="1" />
-                  <label for="option2"></label>
-                </div>
-                <div>
-                  <input type="radio" class="option" id="option3" name="question" value="2" />
-                  <label for="option3"></label>
-                </div>
-                <div>
-                  <input type="radio" class="option" id="option4" name="question" value="3" />
-                  <label for="option4"></label>
-                </div>
-                <button class="checkAnswer">Ответить</button>
-              </fieldset>
-    
-              <p class="answer"></p>
+                <p class="question"></p>
+
+                <fieldset>
+                    <div>
+                        <input type="radio" class="option" id="option1" name="question" value="0" />
+                        <label for="option1"></label>
+                    </div>
+                    <div>
+                        <input type="radio" class="option" id="option2" name="question" value="1" />
+                        <label for="option2"></label>
+                    </div>
+                    <div>
+                        <input type="radio" class="option" id="option3" name="question" value="2" />
+                        <label for="option3"></label>
+                    </div>
+                    <div>
+                        <input type="radio" class="option" id="option4" name="question" value="3" />
+                        <label for="option4"></label>
+                    </div>
+                    <button class="checkAnswer">Ответить</button>
+                </fieldset>
+
+                <p class="answer"></p>
             </div>
-          </div>
+        </div>
     </div>
 
     <p class="law-text">Расставьте корабли в соответствии с правилами игры "Морской бой"</p>
-    
-    <div class="counter">
-        <div class="counter-container hidden">
-            <span class="team-name">Первая команда</span>
-            <span class="counter-span" id="counter-text-1"></span>
-            <span id="counter-1">0</span>
-        </div>
-        <div class="counter-container hidden">
-            <span class="team-name">Вторая команда</span>
-            <span class="counter-span" id="counter-text-2"></span>
-            <span id="counter-2">0</span>
-        </div>
-    </div>
-    
+
     <div id="main">
         <div class="ship-container">
             <div id="ship-1" class="ship" draggable="true"></div>
@@ -92,14 +79,14 @@
             <div id="ship-4" class="ship" draggable="true"></div>
         </div>
     </div>
-    
+
     <div class="button-container">
         <button class="createBattlefield">Создать поля</button>
         <button class="startGame hidden">Начать игру</button>
     </div>
 
-    <script type="module" src="app/data.js"></script>   
-    <script type="module" src="app/app.js"></script>   
+    <script type="module" src="app/data.js"></script>
+    <script type="module" src="app/app.js"></script>
 </body>
 
 </html>
