@@ -37,9 +37,9 @@ function showAnswer(){
 
 function showDialog(title, description, answer){
     // Сбрасываем состояние диалога
-    $dlgTitle.text(title);
-    $dlgSubtitle.text(description);
-    $dlgDesc.text(answer);
+    $dlgTitle.html(title);
+    $dlgSubtitle.html(description);
+    $dlgDesc.html(answer);
     $dlgRightBtn.hide();
     $dlgWrongBtn.hide();
     $dlgShowBtn.show();
