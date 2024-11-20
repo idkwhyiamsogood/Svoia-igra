@@ -29,8 +29,14 @@ table td {
     background-color: #e0e0ff;
 }
 
-.game-field td.used {
-    background: gray;
+.game-field td.ok {
+    background: rgb(34 197 94);
+    color: white;
+    cursor: not-allowed;
+}
+
+.game-field td.wrong {
+    background: rgb(220 38 38);
     color: white;
     cursor: not-allowed;
 }

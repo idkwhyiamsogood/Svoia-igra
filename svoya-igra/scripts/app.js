@@ -6,6 +6,8 @@ let commandsData = [];
 let currentRound = -1;
 let currentQuestion = "";
 
+let $lastCellClicked;
+
 let gameData = {};
 
 let $dlg = $("dialog");
@@ -39,6 +41,7 @@ $(document).ready(function() {
         nextCommand();
         refreshScoresTable();
         closeDialog();
+        $($lastCellClicked).addClass("ok");
     });
 
     $dlgWrongBtn.click(function() {
@@ -46,6 +49,7 @@ $(document).ready(function() {
         nextCommand();
         refreshScoresTable();
         closeDialog();
+        $($lastCellClicked).addClass("wrong");
     });
 });
 
@@ -149,8 +153,8 @@ function renderTable(){
             let questionTitle = `${categoryData[0].title} ${$(this).text()}`;
             currentQuestion = id;
             if (gameData.data[id]) {
+                $lastCellClicked = this;
                 showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer);
-                $(this).addClass("used");
             }
         }
     });
@@ -163,7 +167,7 @@ function nextRound(){
         alert("игра окончена!")
         return;
     }
-    $roundTitle.text(`Раунд ${currentRound}`);
+    $roundTitle.text(`Раунд ${currentRound + 1}`);
 
     gameData = mock[currentRound];
     closeDialog();
