@@ -5,6 +5,7 @@ let lastCommandId = -1;
 let commandsData = [];
 let currentRound = -1;
 let currentQuestion = "";
+let dialogMode = "";
 
 let $lastCellClicked;
 
@@ -23,6 +24,10 @@ let $dlgShowBtn = $("dialog .show-answer");
 
 let $dlgAuc = $("dialog .auction-mode");
 let $dlgAucPrice = $("dialog .auction-mode input");
+let $dlgAucSelect = $("dialog .auction-mode select");
+
+let $dlgIconCat = $("dialog .catInBag-icon");
+let $dlgIconAuc = $("dialog .auction-icon");
 
 let $scoresTable = $("table.scores");
 let $gameTable = $(".game-field");
@@ -50,6 +55,10 @@ $(document).ready(function() {
     $dlgWrongBtn.click(function() {
         // Ответ неверный
         $($lastCellClicked).addClass("wrong used");
+        // Если это аукцион - вычитаем баллы
+        if(dialogMode === "auction"){
+            commandsData[lastCommandId].scores -= parseInt(currentQuestion.split("-")[1]);
+        }
         nextCommand();
         refreshScoresTable();
         closeDialog();
@@ -111,11 +120,15 @@ function refreshScoresTable(){
     })
 }
 
-function nextCommand(){
+function nextCommand(cmdId = null){
     // Следующая команда (или первая, игра по кругу)
-    lastCommandId++;
-    if(!commandsData[lastCommandId]){
-        lastCommandId = 0;
+    if(!cmdId){
+        lastCommandId++;
+        if(!commandsData[lastCommandId]){
+            lastCommandId = 0;
+        }
+    } else {
+        lastCommandId = cmdId;
     }
     updateCurrentCommand();
 
@@ -161,13 +174,17 @@ function renderTable(){
                     // Если это аукцион
                     showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer, false);
                     dialogAuctionMode(parseInt($(this).text()));
+                    dialogMode = "auction";
                 } else if(gameData.data[id].catInBag){
                     // Если это кот в мешке
                     alert("Кот в мешке!");
                     showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer, false);
+                    dialogCatMode();
+                    dialogMode = "catInBag";
                 } else {
                     // Если это обычный вопрос
                     showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer);
+                    dialogMode = "";
                 }
             }
         }

@@ -38,6 +38,10 @@
 
     <!-- Диалог в ожидании ответа -->
     <dialog style="display: none;">
+        <!-- Нужные иконочки -->
+        <img src="assets/auction.png" class="auction-icon" height="200" style="display: none;">
+        <img src="assets/kot-v-meshke.png" class="catInBag-icon" height="200" style="display: none;">
+
         <div class="clock">
             <span class="material-symbols-outlined">timer</span>
             <span id="dialog-timer"></span>
@@ -57,7 +61,8 @@
 
         <!-- Режим аукциона -->
         <div class="auction-mode" style="display: none;">
-            <input type="number" min="500" step="50" />
+            <input type="number" step="50" />
+            <select class="select-command-auction"></select>
             <button class="save blue" onclick="dialogSaveAuction()">Сохранить</button>
         </div>
     </dialog>

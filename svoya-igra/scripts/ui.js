@@ -35,6 +35,7 @@ function showAnswer(){
     stopClocksInterval();
 }
 
+// Показать диалог
 function showDialog(title, description, answer, startTimer = true){
     // Сбрасываем состояние диалога
     $dlgTitle.html(title);
@@ -44,6 +45,8 @@ function showDialog(title, description, answer, startTimer = true){
     $dlgWrongBtn.hide();
     $dlgShowBtn.show();
     $dlgAuc.hide();
+    $dlgIconCat.hide();
+    $dlgIconAuc.hide();
     $dlgDesc.hide();
     $dlgTimer.text("01:00");
     if(startTimer) setClocksInterval();
@@ -52,11 +55,20 @@ function showDialog(title, description, answer, startTimer = true){
     $dlg[0].showModal();
 }
 
+// Диалог-аукцион
 function dialogAuctionMode(price){
     $dlgAucPrice.val(price);
     $dlgAuc.show();
+    $dlgIconAuc.show();
+
+    // Загружаем список команд в select
+    $dlgAucSelect.html("");
+    commandsData.forEach((item, i) => {
+        $dlgAucSelect.append(`<option value="${i}" ${i === lastCommandId ? "selected" : ""}>${item.name}</option>`);
+    });
 }
 
+// Сохранить аукционное предложение
 function dialogSaveAuction(){
     let price = parseInt($dlgAucPrice.val());
     let title = $dlgTitle.text();
@@ -66,6 +78,14 @@ function dialogSaveAuction(){
     $dlgTitle.text(`${titleNoPrice} ${price}`);
 
     currentQuestion = `${currentQuestion.split("-")[0]}-${price}`;
+
+    let cmdId = $dlgAucSelect.val();
+    nextCommand(cmdId);
+}
+
+// Диалог - кот в мешке
+function dialogCatMode(){
+    $dlgIconCat.show();
 }
 
 function updateCurrentCommand(){

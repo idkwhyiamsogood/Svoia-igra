@@ -49,7 +49,7 @@ body {
 }
 
 /* Кнопки */
-button {
+button, input, select {
     appearance: none;
     outline: none;
     border: none;
