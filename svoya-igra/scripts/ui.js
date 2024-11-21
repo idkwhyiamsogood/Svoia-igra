@@ -35,7 +35,7 @@ function showAnswer(){
     stopClocksInterval();
 }
 
-function showDialog(title, description, answer){
+function showDialog(title, description, answer, startTimer = true){
     // Сбрасываем состояние диалога
     $dlgTitle.html(title);
     $dlgSubtitle.html(description);
@@ -43,12 +43,29 @@ function showDialog(title, description, answer){
     $dlgRightBtn.hide();
     $dlgWrongBtn.hide();
     $dlgShowBtn.show();
+    $dlgAuc.hide();
     $dlgDesc.hide();
     $dlgTimer.text("01:00");
-    setClocksInterval();
+    if(startTimer) setClocksInterval();
     // Показываем диалог
     $dlg.show();
     $dlg[0].showModal();
+}
+
+function dialogAuctionMode(price){
+    $dlgAucPrice.val(price);
+    $dlgAuc.show();
+}
+
+function dialogSaveAuction(){
+    let price = parseInt($dlgAucPrice.val());
+    let title = $dlgTitle.text();
+    let titleNoPrice = title.split(" ");
+    titleNoPrice.pop();
+    titleNoPrice = titleNoPrice.join(" ");
+    $dlgTitle.text(`${titleNoPrice} ${price}`);
+
+    currentQuestion = `${currentQuestion.split("-")[0]}-${price}`;
 }
 
 function updateCurrentCommand(){

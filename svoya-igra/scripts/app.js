@@ -21,6 +21,9 @@ let $dlgRightBtn = $("dialog .right");
 let $dlgWrongBtn = $("dialog .wrong");
 let $dlgShowBtn = $("dialog .show-answer");
 
+let $dlgAuc = $("dialog .auction-mode");
+let $dlgAucPrice = $("dialog .auction-mode input");
+
 let $scoresTable = $("table.scores");
 let $gameTable = $(".game-field");
 let $gameStatus = $(".game-status");
@@ -38,18 +41,18 @@ $(document).ready(function() {
     $dlgRightBtn.click(function() {
         // Ответ верный -> + счёт
         commandsData[lastCommandId].scores += parseInt(currentQuestion.split("-")[1]);
+        $($lastCellClicked).addClass("ok used");
         nextCommand();
         refreshScoresTable();
         closeDialog();
-        $($lastCellClicked).addClass("ok");
     });
 
     $dlgWrongBtn.click(function() {
         // Ответ неверный
+        $($lastCellClicked).addClass("wrong used");
         nextCommand();
         refreshScoresTable();
         closeDialog();
-        $($lastCellClicked).addClass("wrong");
     });
 });
 
@@ -154,7 +157,18 @@ function renderTable(){
             currentQuestion = id;
             if (gameData.data[id]) {
                 $lastCellClicked = this;
-                showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer);
+                if(gameData.data[id].auction){
+                    // Если это аукцион
+                    showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer, false);
+                    dialogAuctionMode(parseInt($(this).text()));
+                } else if(gameData.data[id].catInBag){
+                    // Если это кот в мешке
+                    alert("Кот в мешке!");
+                    showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer, false);
+                } else {
+                    // Если это обычный вопрос
+                    showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer);
+                }
             }
         }
     });
