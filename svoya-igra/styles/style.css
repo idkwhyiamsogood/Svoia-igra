@@ -1,6 +1,7 @@
 @import url("../assets/Gilroy/stylesheet.css");
 @import url("table.css");
 @import url("dialog.css");
+@import url("final.css");
 
 * {
     margin: 0;

@@ -195,7 +195,9 @@ function nextRound(){
     $title.show();
     currentRound++;
     if(!mock[currentRound]) {
-        alert("игра окончена!")
+        // Переходим к финалу
+        alert("Переходим к финалу!");
+        goFinal();
         return;
     }
     $roundTitle.text(`Раунд ${currentRound + 1}`);
