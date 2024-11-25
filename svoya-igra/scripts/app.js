@@ -177,7 +177,6 @@ function renderTable(){
                     dialogMode = "auction";
                 } else if(gameData.data[id].catInBag){
                     // Если это кот в мешке
-                    alert("Кот в мешке!");
                     showDialog(questionTitle, gameData.data[id].description, gameData.data[id].answer, false);
                     dialogCatMode();
                     dialogMode = "catInBag";

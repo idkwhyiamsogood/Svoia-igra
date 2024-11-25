@@ -70,14 +70,16 @@ function dialogAuctionMode(price){
 
 // Сохранить аукционное предложение
 function dialogSaveAuction(){
-    let price = parseInt($dlgAucPrice.val());
-    let title = $dlgTitle.text();
-    let titleNoPrice = title.split(" ");
-    titleNoPrice.pop();
-    titleNoPrice = titleNoPrice.join(" ");
-    $dlgTitle.text(`${titleNoPrice} ${price}`);
+    if($dlgAucPrice.css("display") !== "none"){
+        let price = parseInt($dlgAucPrice.val());
+        let title = $dlgTitle.text();
+        let titleNoPrice = title.split(" ");
+        titleNoPrice.pop();
+        titleNoPrice = titleNoPrice.join(" ");
+        $dlgTitle.text(`${titleNoPrice} ${price}`);
 
-    currentQuestion = `${currentQuestion.split("-")[0]}-${price}`;
+        currentQuestion = `${currentQuestion.split("-")[0]}-${price}`;
+    }
 
     let cmdId = $dlgAucSelect.val();
     nextCommand(cmdId);
@@ -86,6 +88,8 @@ function dialogSaveAuction(){
 // Диалог - кот в мешке
 function dialogCatMode(){
     $dlgIconCat.show();
+    dialogAuctionMode(parseInt($(this).text()));
+    $("dialog .auction-mode input").hide();
 }
 
 function updateCurrentCommand(){
