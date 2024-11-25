@@ -36,14 +36,34 @@
         <div class="final" style="display: none;">
             <div class="command1">
                 <h3 class="name"></h3>
+                <h2 class="scors"></h2>
+
+                <h3>Цена ответа:</h3>
+                <input type="number" value="100" min="100" step="50" />
+
+                <button style="display: none;" onclick="final_answer(true, 0)">Ответили верно</button>
+                <button style="display: none;"onclick="final_answer(false, 0)">Ответили неверно</button>
             </div>
             <div class="categories">
                 <table></table>
+                <h1 class="question"></h1>
+                <button class="blue" style="display: none;" onclick="final_showAnswer()">Показать ответ!</button>
+                <h3 class="answer"></h3>
             </div>
             <div class="command2">
                 <h3 class="name"></h3>
+                <h2 class="scors"></h2>
+
+                <h3>Цена ответа:</h3>
+                <input type="number" value="100" min="100" step="50" />
+
+                <button style="display: none;" onclick="final_answer(true, 1)">Ответили верно</button>
+                <button style="display: none;" onclick="final_answer(false, 1)">Ответили неверно</button>
             </div>
         </div>
+
+        <!-- Таблица победителей -->
+        <div class="winners" style="display: none;"></div>
     </div>
 
     <!-- Таблица очков -->

@@ -287,7 +287,7 @@ var mockFinal = {
             "answer": "Коррупция"
         },
         "ребус": {
-            "image": "rebus.jpg",
+            "image": "assets/rebus.jpg",
             "answer": "Коррупция"
         },
         "книга": {

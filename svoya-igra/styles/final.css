@@ -14,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 16px;
 }
 
 .final > div > h3 {
@@ -28,11 +29,87 @@
     grid-area: command2;
 }
 
+.final > div > h1 {
+    font-size: 18pt;
+    font-weight: 500;
+    text-align: center;
+}
+
 .final .categories {
     grid-area: categories;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
 }
 
 /* Таблица */
 .final .categories table th:hover {
     filter: brightness(80%);
+}
+
+.final .categories table {
+    min-width: 10vw;
+}
+
+/* Победители */
+.winners {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.winners .item {
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: max-content 1fr; 
+    grid-template-rows: max-content max-content; 
+    gap: 12px;
+    grid-template-areas: 
+      "place title"
+      "place scores"; 
+}
+
+.winners .item  .place {
+    justify-self: center; 
+    align-self: center; 
+    grid-area: place;
+
+    background: #cacaca;
+    color: black;
+
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 9999px;
+
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.winners .item .place.first {
+    background: #4a4a8f;
+    color: white;
+}
+
+.winners .item .title {
+    align-self: end; 
+    grid-area: title; 
+    font-size: 22pt;
+    font-weight: 700;
+}
+
+.winners .item .value {
+    align-self: start; 
+    grid-area: scores; 
+    font-size: 18pt;
+    font-weight: 400;
 }

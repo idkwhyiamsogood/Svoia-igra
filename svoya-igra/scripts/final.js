@@ -1,5 +1,8 @@
 let finalCommands = [];
 let currentFinalCategories = [];
+let finalCurData;
+let cmdAnsweredRight = [];
+let cmdScores = [];
 
 // Анимация показа финала
 function showFinal(){
@@ -32,6 +35,9 @@ function goFinal(){
 
     $(".final .command1 .name").text(finalCommands[0].name);
     $(".final .command2 .name").text(finalCommands[1].name);
+
+    $(".final .command1 .scors").text(finalCommands[0].scores + " б.");
+    $(".final .command2 .scors").text(finalCommands[1].scores + " б.");
     showFinal();
 
     $roundTitle.text(`Финал`);
@@ -57,5 +63,63 @@ function final_deleteCategory(elem) {
 
     if(currentFinalCategories.length === 1){
         // Если осталась одна тема
+        $(".final .categories table").css("pointer-events","none");
+        finalCurData = mockFinal.data[currentFinalCategories[0]];
+
+        if(finalCurData.description) $(".final .categories .question").text(finalCurData.description);
+
+        if(finalCurData.image) $(".final .categories").append(`<img src="${finalCurData.image}" />`)
+        
+        $(".final .categories button").show();
     }
+}
+
+// Показать ответ и кнопки
+function final_showAnswer(){
+    $(".final .categories .answer").text(finalCurData.answer);
+    $(".final .categories button").hide();
+
+    $(".final .command1 input").prop('disabled', true);
+    $(".final .command2 input").prop('disabled', true);
+    cmdScores[0] = parseInt($(".final .command1 input").val());
+    cmdScores[1] = parseInt($(".final .command2 input").val());
+
+    $(".final .command1 button").show();
+    $(".final .command2 button").show();
+}
+
+// Кто-то дал ответ на вопрос
+function final_answer(isRight, cmdId){
+    cmdAnsweredRight[cmdId] = isRight;
+
+    $(`.final .command${cmdId + 1} button`).hide();
+
+    if(isRight){
+        let $scr = $(`.final .command${cmdId + 1} .scors`);
+        let curScores = parseInt($scr.text().split(" "));
+        let newScores = curScores + cmdScores[cmdId];
+        $scr.text(`${newScores} б.`);
+        finalCommands[cmdId].scores = newScores;
+        commandsData[cmdId].scores = newScores;
+    }
+
+    if(cmdAnsweredRight.length === 2){
+        // Если обе команды ответили
+        final_goWinnersTable();
+    }
+}
+
+// Показать таблицу победителей
+function final_goWinnersTable(){
+    $(".final").hide();
+    $roundTitle.text(`Таблица победителей`);
+    $(".winners").show();
+
+    commandsData.forEach((item, i) => {
+        $(".winners").append(`<div class="item">
+                <div class="place ${i === 0 ? "first" : ""}">${i + 1}</div>
+                <div class="title">${item.name}</div>
+                <div class="value">${item.scores} б.</div>
+            </div>`);
+    })
 }
