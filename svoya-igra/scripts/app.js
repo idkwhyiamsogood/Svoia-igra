@@ -133,8 +133,9 @@ function nextCommand(cmdId = null){
     updateCurrentCommand();
 
     if(isGameEnded()){
-        alert("Переходим к следующему раунду");
-        nextRound();
+        $("#next-round-btn").show();
+        //alert("Переходим к следующему раунду");
+        //nextRound();
     }
 }
 
@@ -191,11 +192,12 @@ function renderTable(){
 }
 
 function nextRound(){
+    $("#next-round-btn").hide();
     $title.show();
     currentRound++;
     if(!mock[currentRound]) {
         // Переходим к финалу
-        alert("Переходим к финалу!");
+        //alert("Переходим к финалу!");
         goFinal();
         return;
     }

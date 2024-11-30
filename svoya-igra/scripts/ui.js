@@ -57,6 +57,7 @@ function showDialog(title, description, answer, startTimer = true){
 
 // Диалог-аукцион
 function dialogAuctionMode(price){
+    $dlgIconCat.hide();
     $dlgAucPrice.val(price);
     $dlgAuc.show();
     $dlgIconAuc.show();
@@ -87,8 +88,9 @@ function dialogSaveAuction(){
 
 // Диалог - кот в мешке
 function dialogCatMode(){
-    $dlgIconCat.show();
     dialogAuctionMode(parseInt($(this).text()));
+    $dlgIconAuc.hide();
+    $dlgIconCat.show();
     $("dialog .auction-mode input").hide();
 }
 
