@@ -56,7 +56,7 @@ $(document).ready(function() {
         // Ответ неверный
         $($lastCellClicked).addClass("wrong used");
         // Если это аукцион - вычитаем баллы
-        if(dialogMode === "auction"){
+        if(dialogMode === "auction" || dialogMode === "catInBag"){
             commandsData[lastCommandId].scores -= parseInt(currentQuestion.split("-")[1]);
         }
         nextCommand();
@@ -73,6 +73,8 @@ function setClocksInterval(){
         minutes = parseInt(minutes);
         seconds = parseInt(seconds);
 
+        console.log(minutes, seconds);
+
         if(seconds == 0){
             minutes--;
             seconds = 59;
@@ -81,8 +83,7 @@ function setClocksInterval(){
         }
 
         if(seconds == 0 && minutes == 0) {
-            // Показать ответ, если время вышло
-            showAnswer();
+            return $dlgTimer.html("Время вышло!");
         }
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -100,10 +101,13 @@ function saveCommands(){
     // Сохраняем список команд и настраиваем переменные
     let names = $(".commands-area textarea").val().split("\n");
     names.forEach(item => {
-        commandsData.push({
-            name: item,
-            scores: 0
-        })
+        item = item.trim();
+        if(item !== ''){
+            commandsData.push({
+                name: item,
+                scores: 0
+            })
+        }
     })
 
     lastCommandId = 0;

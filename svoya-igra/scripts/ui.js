@@ -61,6 +61,7 @@ function dialogAuctionMode(price){
     $dlgAucPrice.val(price);
     $dlgAuc.show();
     $dlgIconAuc.show();
+    $("dialog .auction-mode input").show();
 
     // Загружаем список команд в select
     $dlgAucSelect.html("");
@@ -84,6 +85,7 @@ function dialogSaveAuction(){
 
     let cmdId = $dlgAucSelect.val();
     nextCommand(cmdId);
+    setClocksInterval();
 }
 
 // Диалог - кот в мешке
