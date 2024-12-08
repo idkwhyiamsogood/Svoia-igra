@@ -83,7 +83,9 @@ function setClocksInterval(){
         }
 
         if(seconds == 0 && minutes == 0) {
-            return $dlgTimer.html("Время вышло!");
+            $dlgTimer.html("Время вышло!");
+            stopClocksInterval();
+            return;
         }
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
