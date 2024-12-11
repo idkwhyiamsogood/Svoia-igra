@@ -26,6 +26,9 @@ let $dlgAuc = $("dialog .auction-mode");
 let $dlgAucPrice = $("dialog .auction-mode input");
 let $dlgAucSelect = $("dialog .auction-mode select");
 
+let $dlgSaveNotify = $("dialog #save-cmds-notify");
+let $dlgSaveBtn = $("dialog button.save.blue");
+
 let $dlgIconCat = $("dialog .catInBag-icon");
 let $dlgIconAuc = $("dialog .auction-icon");
 
@@ -66,14 +69,16 @@ $(document).ready(function() {
 });
 
 function setClocksInterval(){
+    // Предварительно очищаем счётчик
+
+    if(clocksInterval)
+        clearInterval(clocksInterval);
     // Интервал для уменьшения счётчика
     clocksInterval = setInterval(() => {
         let currentTime = $dlgTimer.text();
         let [minutes, seconds] = currentTime.split(":");
         minutes = parseInt(minutes);
         seconds = parseInt(seconds);
-
-        console.log(minutes, seconds);
 
         if(seconds == 0){
             minutes--;

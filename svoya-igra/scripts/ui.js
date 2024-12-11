@@ -48,6 +48,8 @@ function showDialog(title, description, answer, startTimer = true){
     $dlgIconCat.hide();
     $dlgIconAuc.hide();
     $dlgDesc.hide();
+    $dlgSaveBtn.hide();
+    $dlgSaveNotify.hide();
     $dlgTimer.text("01:00");
     if(startTimer) setClocksInterval();
     // Показываем диалог
@@ -61,6 +63,8 @@ function dialogAuctionMode(price){
     $dlgAucPrice.val(price);
     $dlgAuc.show();
     $dlgIconAuc.show();
+    $dlgSaveBtn.show();
+    $dlgSaveNotify.show();
     $("dialog .auction-mode input").show();
 
     // Загружаем список команд в select
@@ -84,6 +88,7 @@ function dialogSaveAuction(){
     }
 
     let cmdId = $dlgAucSelect.val();
+    $dlgSaveBtn.hide();
     nextCommand(cmdId);
     setClocksInterval();
 }
@@ -93,6 +98,8 @@ function dialogCatMode(){
     dialogAuctionMode(parseInt($(this).text()));
     $dlgIconAuc.hide();
     $dlgIconCat.show();
+    $dlgSaveBtn.show();
+    $dlgSaveNotify.show();
     $("dialog .auction-mode input").hide();
 }
 
