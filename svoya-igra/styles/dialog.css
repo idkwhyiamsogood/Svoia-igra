@@ -29,20 +29,20 @@ dialog {
 }
 
 dialog h1 {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     color: #4a4a8f;
     text-align: center;
 }
 
 dialog h2 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     color: #333;
     text-wrap: wrap;
     text-align: center;
 }
 
 dialog h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #666;
     text-wrap: wrap;
     text-align: center;
