@@ -111,6 +111,9 @@ function final_answer(isRight, cmdId){
 
 // Показать таблицу победителей
 function final_goWinnersTable(){
+    commandsData.sort((a, b) => b.scores - a.scores);
+    refreshScoresTable();
+    
     $(".final").hide();
     $roundTitle.text(`Таблица победителей`);
     $(".winners").show();
